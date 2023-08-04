@@ -7,10 +7,8 @@ export default function CreateHr() {
         <input type="text" name="name" placeholder="Name" />
         <br />
         <br />
-
         <label>Age</label>
         <input type="text" name="age" placeholder="Age" />
-
         <br />
         <br />
         <label>gender</label>
@@ -20,12 +18,10 @@ export default function CreateHr() {
         <br />
         <label>Email</label>
         <input type="text" name="email" placeholder="Email" />
-
         <br />
         <br />
         <label>Password</label>
         <input type="password" name="password" placeholder="Password" />
-
         <br />
         <br />
         <button type="submit">Submit</button>
