@@ -1,36 +1,124 @@
-export default function CreateHr() {
+import React, { useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
+
+export default function Register() {
+  const router = useRouter();
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [gender, setGender] = useState("");
+  const [age, setAge] = useState("");
+  const [password, setPassword] = useState("");
+  const [education, setEducation] = useState("");
+  const [myfile, setMyfile] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/moderator/Register",
+        {
+          name,
+          phone,
+          email,
+          gender,
+          age,
+          password,
+          education,
+          myfile,
+        },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      if (response.data) {
+        console.log("Form submitted successfully");
+        router.push("/Moderator/login");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
-      <h1>Registration</h1>
-      <form>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
         <label>Name</label>
-        <input type="text" name="name" placeholder="Name" />
+        <input
+          type="text"
+          name="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
         <br />
+
+        <label>Phone</label>
+        <input
+          type="text"
+          name="phone"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+        />
+        <br />
+
+        <label>Email</label>
+        <input
+          type="email"
+          name="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <br />
+
+        <label>Gender</label>
+        <input
+          type="text"
+          name="gender"
+          value={gender}
+          onChange={(e) => setGender(e.target.value)}
+        />
+        <br />
+
+        <label>Password</label>
+        <input
+          type="password"
+          name="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <br />
 
         <label>Age</label>
-        <input type="text" name="age" placeholder="Age" />
+        <input
+          type="text"
+          name="age"
+          value={age}
+          onChange={(e) => setAge(e.target.value)}
+        />
+        <br />
 
+        <label>Education</label>
+        <input
+          type="text"
+          name="education"
+          value={education}
+          onChange={(e) => setEducation(e.target.value)}
+        />
         <br />
-        <br />
-        <label>gender</label>
-        <input type="text" name="gender" placeholder="Gender" />
 
+        <label>Image</label>
+        <input
+          type="file"
+          name="myfile"
+          onChange={(e) => setMyfile(e.target.files[0])}
+        />
         <br />
-        <br />
-        <label>Email</label>
-        <input type="text" name="email" placeholder="Email" />
 
-        <br />
-        <br />
-        <label>Password</label>
-        <input type="password" name="password" placeholder="Password" />
-
-        <br />
-        <br />
         <button type="submit">Submit</button>
       </form>
-      <br />
     </div>
   );
 }

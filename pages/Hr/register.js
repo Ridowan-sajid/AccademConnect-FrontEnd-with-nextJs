@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Nanum_Pen_Script } from "next/font/google";
+import { useRouter } from "next/router";
+import Header from "../Layout/header";
 
 export default function Register() {
-  //const navigate = useNavigate();
+  const router = useRouter();
 
   const [register, setRegister] = useState({
     name: "",
@@ -60,6 +61,7 @@ export default function Register() {
           myfile: null,
         });
         console.log("Form submitted successfully");
+        router.push("/Hr/login");
       }
     } catch (error) {
       console.log(error);
@@ -68,18 +70,12 @@ export default function Register() {
 
   return (
     <div>
-      <form
-        method="post"
-        action=""
-        className="container my-5"
-        onSubmit={handleSubmit}
-        encType="multipart/form-data"
-      >
-        <div className="form-group">
+      <Header dashboard="Registration"></Header>
+      <form method="post" onSubmit={handleSubmit} encType="multipart/form-data">
+        <div>
           <label>Name</label>
           <input
             type="text"
-            className="form-control"
             name="name"
             value={register.name}
             onChange={handleChange}
@@ -87,11 +83,10 @@ export default function Register() {
           <br />
         </div>
 
-        <div className="form-group">
+        <div>
           <label>Phone</label>
           <input
             type="text"
-            className="form-control"
             name="phone"
             value={register.phone}
             onChange={handleChange}
@@ -99,11 +94,10 @@ export default function Register() {
           <br />
         </div>
 
-        <div className="form-group">
+        <div>
           <label>Email</label>
           <input
             type="email"
-            className="form-control"
             name="email"
             value={register.email}
             onChange={handleChange}
@@ -111,11 +105,10 @@ export default function Register() {
           <br />
         </div>
 
-        <div className="form-group">
+        <div>
           <label>Gender</label>
           <input
             type="text"
-            className="form-control"
             name="gender"
             value={register.gender}
             onChange={handleChange}
@@ -123,11 +116,10 @@ export default function Register() {
           <br />
         </div>
 
-        <div className="form-group">
+        <div>
           <label>Password</label>
           <input
             type="password"
-            className="form-control"
             name="password"
             value={register.password}
             onChange={handleChange}
@@ -135,11 +127,10 @@ export default function Register() {
           <br />
         </div>
 
-        <div className="form-group">
+        <div>
           <label>Age</label>
           <input
             type="text"
-            className="form-control"
             name="age"
             value={register.age}
             onChange={handleChange}
@@ -147,20 +138,13 @@ export default function Register() {
           <br />
         </div>
 
-        <div className="form-group">
+        <div>
           <label>Image</label>
-          <input
-            type="file"
-            className="form-control"
-            name="myfile"
-            onChange={handleChange}
-          />
+          <input type="file" name="myfile" onChange={handleChange} />
           <br />
         </div>
 
-        <button className="btn btn-primary" type="submit">
-          Submit
-        </button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );

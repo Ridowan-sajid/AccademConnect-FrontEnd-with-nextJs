@@ -1,11 +1,32 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
 export default function MyProfile() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const getData = async (id) => {
+      try {
+        const data = await axios.get(`http://localhost:3000/admin/profile/`);
+        setData(data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getData();
+  }, []);
+
   return (
     <div>
-      <h1>My Profile</h1>
-      <p>Name: Ridowan Ul Alam</p>
-      <p>Age: 23</p>
-      <p>Gender: Male</p>
-      <p>Email: sajidridowan7@gmail.com</p>
+      {data && (
+        <div key={data.id}>
+          <h4>Name: {data.name}</h4>
+          <p>Age: {data.age}</p>
+          <p>Phone: {data.phone}</p>
+          <p>Email: {data.email}</p>
+          <p>Gender: {data.gender}</p>
+        </div>
+      )}
     </div>
   );
 }
