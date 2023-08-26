@@ -97,6 +97,7 @@ import Link from "next/link";
 export default function Login() {
   const router = useRouter();
   const { login } = useAuth();
+  const [notfound, setNotfound] = useState(false);
 
   const [register, setRegister] = useState({
     email: "",
@@ -158,6 +159,7 @@ export default function Login() {
         router.push("/Hr/myProfile");
       }
     } catch (error) {
+      setNotfound(true);
       console.log(error);
     }
   };
@@ -219,6 +221,9 @@ export default function Login() {
           Register Here
         </Link>
       </form>
+      {notfound && (
+        <h2 className="pl-2 text-red-800 font-bold">Not found any user</h2>
+      )}
     </div>
   );
 }

@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
       setUser(null);
       document.cookie = null;
 
-      router.push("../Hr/login");
+      //router.push("../Hr/login");
     } catch (error) {
       console.error("error failed: ", error);
     }

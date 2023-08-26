@@ -17,7 +17,7 @@ export default function DeleteProfile() {
     <div>
       <Header></Header>
       <div className="flex justify-center mt-20">
-        <h1>
+        <h1 className="text-green-800 font-bold">
           Are you willing to delete your Profile{" "}
           <button
             type="submit"

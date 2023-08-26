@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Header from "../Layout/header";
+import Header from "../Layout/adminHeader";
 import axios from "axios";
 import { useRouter } from "next/router";
 
@@ -48,7 +48,7 @@ export default function ChangePassword() {
     }
 
     try {
-      const response = await axios.patch(
+      const response = await axios.post(
         "http://localhost:3000/admin/changePassword",
         {
           oldPassword: password.oldPassword,
@@ -65,7 +65,7 @@ export default function ChangePassword() {
           newPassword: "",
         });
         console.log("Form submitted successfully");
-        router.push("/Hr/myProfile");
+        router.push("/Admin/myProfile");
       }
     } catch (error) {
       console.log(error);
@@ -74,6 +74,7 @@ export default function ChangePassword() {
 
   return (
     <div>
+      <Header></Header>
       <br />
       <form
         className="w-full max-w-lg container mx-auto my-20"
@@ -118,7 +119,7 @@ export default function ChangePassword() {
 
         <br />
         <br />
-        <button className="btn btn-secondary" type="submit">
+        <button className="btn btn-primary" type="submit">
           Submit
         </button>
       </form>

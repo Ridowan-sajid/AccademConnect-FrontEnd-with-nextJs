@@ -13,35 +13,23 @@ export default function Header() {
     fetchData();
   }, []);
 
-  // function checkSession() {
-  //   fetchData();
-  //   // console.log(user);
-  //   // if (user != null) {
-  //   //   fetchData();
-  //   //   console.log("user:  " + user.email);
-  //   //   console.log("user:  " + user.cookie);
-  //   // } else {
-  //   //   //router.push("../Hr/login");
-  //   // }
-  // }
-
   async function fetchData() {
     try {
-      const response = await axios.get("http://localhost:3000/hr/myprofile/", {
+      const response = await axios.get("http://localhost:3000/admin/profile/", {
         withCredentials: true,
       });
       const jsonData = response.data;
       console.log(jsonData);
       setJsonData(jsonData);
     } catch (error) {
-      router.push("../Hr/login");
+      router.push("../Admin/login");
       console.error(error);
     }
   }
 
   const handleLogout = () => {
     logout();
-    router.push("../Hr/login");
+    router.push("../Admin/login");
   };
 
   return (
@@ -56,28 +44,33 @@ export default function Header() {
         <div className="flex-none">
           <ul className="menu menu-horizontal px-1">
             <button className="btn btn-primary mx-5">
-              <Link className="flex" href="/Hr/changePassword">
+              <Link className="flex" href="/Admin/changepassword">
                 Change Password
               </Link>
             </button>
             <button className="btn btn-primary mx-5">
-              <Link className="flex" href="/Hr/createJob">
-                Create Job Post
+              <Link className="flex" href="/Admin/createModerator">
+                Create Moderator
               </Link>
             </button>
             <button className="btn btn-primary mx-5">
-              <Link className="flex" href="/Hr/editProfile">
+              <Link className="flex" href="/Admin/updateProfile">
                 Edit Profile
               </Link>
             </button>
             <button className="btn btn-primary mx-5">
-              <Link className="flex-1" href="/Hr/myJob">
-                My Job
+              <Link className="flex-1" href="/Admin/readHR">
+                All Hr
               </Link>
             </button>
             <button className="btn btn-primary mx-5">
-              <Link className="flex-1" href="/Hr/readJobPost">
-                Read Job Post
+              <Link className="flex-1" href="/Admin/readStudent">
+                All Student
+              </Link>
+            </button>
+            <button className="btn btn-primary mx-5">
+              <Link className="flex-1" href="/Admin/readModerator">
+                All Moderator
               </Link>
             </button>
           </ul>
@@ -103,15 +96,15 @@ export default function Header() {
               className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
             >
               <li>
-                <Link className="justify-between" href="/Hr/myProfile">
+                <Link className="justify-between" href="/Admin/myProfile">
                   My profile
                 </Link>
               </li>
-              <li>
-                <Link className="justify-between" href="/Hr/deleteProfile">
+              {/* <li> */}
+              {/* <Link className="justify-between" href="/Hr/deleteProfile">
                   Delete Profile
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <button type="submit" onClick={handleLogout}>
                   Logout

@@ -10,7 +10,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import Link from "next/link";
+import Header from "../Layout/adminHeader";
 
 export default function Register() {
   const router = useRouter();
@@ -52,6 +52,7 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const newErrors = {};
 
     if (!register.name) {
@@ -79,13 +80,14 @@ export default function Register() {
       newErrors.myfile = "Image is required";
     }
 
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
+    // if (Object.keys(newErrors).length > 0) {
+
+    //   setErrors(newErrors);
+    //   return;
+    // }
     try {
       const response = await axios.post(
-        "http://localhost:3000/hr/register",
+        "http://localhost:3000/admin/addModerator",
         {
           name: register.name,
           phone: register.phone,
@@ -100,6 +102,7 @@ export default function Register() {
           headers: {
             "Content-Type": "multipart/form-data",
           },
+          withCredentials: true,
         }
       );
       if (response.data) {
@@ -114,7 +117,7 @@ export default function Register() {
           myfile: null,
         });
         console.log("Form submitted successfully");
-        router.push("/Hr/login");
+        router.push("/Admin/readModerator");
       }
     } catch (error) {
       console.log(error);
@@ -123,6 +126,7 @@ export default function Register() {
 
   return (
     <div>
+      <Header></Header>
       <h1 className="w-full max-w-lg container mx-auto mt-10">Register Here</h1>
       <form
         method="post"
@@ -221,20 +225,6 @@ export default function Register() {
 
         <div className="mb-4 flex flex-wrap -mx-3 ">
           <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold">
-            Image
-          </label>
-          <input
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-            type="file"
-            name="myfile"
-            onChange={handleChange}
-          />
-          {errors.myfile && <p className="text-red-500">{errors.myfile}</p>}
-          <br />
-        </div>
-
-        <div className="mb-4 flex flex-wrap -mx-3 ">
-          <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold">
             Education
           </label>
           <input
@@ -247,13 +237,27 @@ export default function Register() {
           <br />
         </div>
 
+        <div className="mb-4 flex flex-wrap -mx-3 ">
+          <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold">
+            Image
+          </label>
+          <input
+            className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+            type="file"
+            name="myfile"
+            onChange={handleChange}
+          />
+          {errors.myfile && <p className="text-red-500">{errors.myfile}</p>}
+          <br />
+        </div>
+
         <button className="mr-5 btn btn-primary" type="submit">
           Submit
         </button>
 
-        <button className="btn btn-primary">
+        {/* <button className="btn btn-primary">
           <Link href="/Hr/login">Back</Link>
-        </button>
+        </button> */}
       </form>
     </div>
   );

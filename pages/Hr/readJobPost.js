@@ -13,7 +13,7 @@ export default function ReadJobPost() {
     const getData = async () => {
       try {
         const data = await axios.get(`http://localhost:3000/Hr/allJob/`, {
-          withCredentials: false,
+          withCredentials: true,
         });
         setData(data.data);
         console.log(data);
