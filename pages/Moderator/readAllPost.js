@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function ReadJobPost() {
   const [data, setData] = useState([]);
@@ -19,19 +20,18 @@ export default function ReadJobPost() {
     getData();
   }, []);
 
-  const handleClick = async (id) => {
-    console.log(id);
-    try {
-      const response = await axios.delete(
-        `http://localhost:3000/moderator/post/${id}`
-      );
+  // const handleClick = async (id) => {
+  //   try {
+  //     const response = await axios.delete(
+  //       `http://localhost:3000/moderator/post/${id}`
+  //     );
 
-      console.log(response);
-      router.reload();
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  //     console.log(response);
+  //     router.reload();
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   return (
     <div>
@@ -42,9 +42,10 @@ export default function ReadJobPost() {
             <h4>Title: {d.title}</h4>
             <p>Details: {d.details}</p>
 
-            <button type="submit" onClick={() => handleClick(d.id)}>
+            {/* <button type="submit" onClick={() => handleClick(d.id)}>
               Delete
-            </button>
+            </button> */}
+            <Link href={"/Moderator/Update/" + d.id}>Details</Link>
 
             <hr />
           </div>

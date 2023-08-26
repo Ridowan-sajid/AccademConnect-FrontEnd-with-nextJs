@@ -5,7 +5,7 @@ export default function MyProfile() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const getData = async (id) => {
+    const getData = async () => {
       try {
         const data = await axios.get(`http://localhost:3000/admin/profile/`);
         setData(data.data);

@@ -11,9 +11,16 @@ export default function useFetch(url) {
 
     const fetchData = async () => {
       try {
-        const response = await axios.get(url, {
-          signal: abortController.signal,
-        });
+        const response = await axios.get(
+          url,
+          {
+            signal: abortController.signal,
+          },
+          {
+            headers: { "Context-Type": "application/x-www-form-urlencoded" },
+            withCredentials: true,
+          }
+        );
         setData(response.data);
         setLoading(false);
       } catch (error) {

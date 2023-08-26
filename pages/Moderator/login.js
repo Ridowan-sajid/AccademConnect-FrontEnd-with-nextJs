@@ -19,7 +19,6 @@ export default function Login() {
         }
       );
       if (response.data) {
-        sessionStorage.setItem("email", email);
         setEmail("");
         setPassword("");
         console.log("Login successful");
