@@ -49,7 +49,7 @@ export default function ReadDetailsJobPost() {
         <div key={data.id} className=" flex  justify-center">
           <hr />
 
-          <div class="max-w-sm rounded overflow-hidden shadow-lg py-5">
+          <div class="w-2/4 rounded overflow-hidden shadow-lg py-5">
             <div class="px-6 py-4">
               <div class="font-bold text-xl mb-2">{data.title}</div>
               <p class="text-gray-700 text-base">{data.details}</p>

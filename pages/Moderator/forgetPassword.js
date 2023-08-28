@@ -1,19 +1,20 @@
-import React, { useState } from "react";
-import axios from "axios";
 import { useRouter } from "next/router";
-import Header from "../Layout/studentHeader";
+import { useState } from "react";
+import axios from "axios";
+import BeforeHeader from "../Layout/beforeHeader";
+import Footer from "../Layout/footer";
 
-export default function CreatePost() {
+export default function ForgetPassword() {
   const router = useRouter();
 
   const [register, setRegister] = useState({
-    title: "",
-    details: "",
+    otp: "",
+    newPassword: "",
   });
 
   const [errors, setErrors] = useState({
-    title: "",
-    details: "",
+    otp: "",
+    newPassword: "",
   });
 
   const handleChange = (e) => {
@@ -33,11 +34,13 @@ export default function CreatePost() {
 
     // Basic validation
     const newErrors = {};
-    if (!register.title) {
-      newErrors.title = "Title is required";
+    if (!register.otp) {
+      newErrors.otp = "OTP is required";
     }
-    if (!register.details) {
-      newErrors.details = "Details are required";
+    if (!register.newPassword) {
+      newErrors.newPassword = "New password is required";
+    } else if (register.newPassword.length < 7) {
+      newErrors.newPassword = "New password must be at least 7 characters";
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -46,24 +49,20 @@ export default function CreatePost() {
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:3000/student/post",
+      const response = await axios.patch(
+        "http://localhost:3000/moderator/forgetPassword/",
         {
-          title: register.title,
-          details: register.details,
-        },
-        {
-          // headers: { "Context-Type": "application/x-www-form-urlencoded" },
-          withCredentials: true,
+          otp: register.otp,
+          newPassword: register.newPassword,
         }
+        // {
+        //   headers: { "Context-Type": "application/x-www-form-urlencoded" },
+        //   withCredentials: true,
+        // }
       );
       if (response.data) {
-        setRegister({
-          title: "",
-          details: "",
-        });
         console.log("Form submitted successfully");
-        router.push("/Student/readPost");
+        router.push("/Moderator/login");
       }
     } catch (error) {
       console.log(error);
@@ -72,53 +71,52 @@ export default function CreatePost() {
 
   return (
     <div>
-      <Header></Header>
+      <BeforeHeader></BeforeHeader>
       <form
         className="w-full max-w-lg container mx-auto my-20"
-        method="post"
-        action=""
         onSubmit={handleSubmit}
-        encType="multipart/form-data"
       >
         <div className="flex flex-wrap -mx-3 mb-6">
           <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-            Title
+            Otp
           </label>
           <input
             className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
             type="text"
-            name="title"
-            placeholder="Title..."
-            value={register.title}
+            name="otp"
+            value={register.otp}
             onChange={handleChange}
           />
+          {errors.otp && <p className="text-red-500">{errors.otp}</p>}
+          <br />
         </div>
 
-        {errors.title && <p style={{ color: "red" }}>{errors.title}</p>}
-        <br />
         <div className="flex flex-wrap -mx-3 mb-6">
           <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-            Details
+            Password
           </label>
-          <textarea
-            rows={10}
-            cols={10}
+          <input
             className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            type="text"
-            placeholder="Details..."
-            name="details"
-            value={register.details}
+            type="password"
+            name="newPassword"
+            value={register.newPassword}
             onChange={handleChange}
           />
+          {errors.newPassword && (
+            <p className="text-red-500">{errors.newPassword}</p>
+          )}
+          <br />
         </div>
-
-        {errors.details && <p style={{ color: "red" }}>{errors.details}</p>}
         <br />
 
-        <button className="btn btn-primary" type="submit">
+        <button
+          className="bg-black text-white font-semibold py-2 px-4 rounded-lg"
+          type="submit"
+        >
           Submit
         </button>
       </form>
+      <Footer></Footer>
     </div>
   );
 }

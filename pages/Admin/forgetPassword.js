@@ -91,6 +91,8 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import axios from "axios";
+import BeforeHeader from "../Layout/beforeHeader";
+import Footer from "../Layout/footer";
 
 export default function ForgetPassword() {
   const router = useRouter();
@@ -159,6 +161,7 @@ export default function ForgetPassword() {
 
   return (
     <div>
+      <BeforeHeader></BeforeHeader>
       <form
         className="w-full max-w-lg container mx-auto my-20"
         onSubmit={handleSubmit}
@@ -203,6 +206,7 @@ export default function ForgetPassword() {
           Submit
         </button>
       </form>
+      <Footer></Footer>
     </div>
   );
 }

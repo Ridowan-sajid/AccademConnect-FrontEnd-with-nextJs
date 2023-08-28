@@ -12,9 +12,12 @@ export default function MyPost() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const data = await axios.get(`http://localhost:3000/moderator/post/`, {
-          withCredentials: true,
-        });
+        const data = await axios.get(
+          `http://localhost:3000/moderator/report/`,
+          {
+            withCredentials: true,
+          }
+        );
         setData(data.data);
         console.log(data.data);
       } catch (error) {
@@ -23,22 +26,6 @@ export default function MyPost() {
     };
     getData();
   }, []);
-
-  const deletePost = async (id) => {
-    try {
-      const response = await axios.delete(
-        `http://localhost:3000/moderator/post/${id}`,
-        {
-          withCredentials: true,
-        }
-      );
-
-      console.log(response);
-      router.reload();
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   return (
     <div>
@@ -50,17 +37,14 @@ export default function MyPost() {
             <div className=" flex  justify-center mt-2" key={d.id}>
               <hr />
 
-              <div className="card w-2/4 bg-white border border-black text-black-content">
+              <div className="card w-96 bg-primary text-primary-content">
                 <div className="card-body">
-                  <h1>Name: {d.title}</h1>
-                  <p>Phone: {d.details}</p>
+                  <h1>Title: {d.title}</h1>
+                  <p>Details: {d.details}</p>
 
                   <div className="card-actions justify-end">
-                    <button
-                      onClick={() => deletePost(d.id)}
-                      className="btn bg-red-800 text-white"
-                    >
-                      Delete
+                    <button className="btn bg-red-800 text-white">
+                      <Link href={"/Moderator/" + d.id}>Update</Link>
                     </button>
                   </div>
                 </div>

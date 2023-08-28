@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Header from "../Layout/adminHeader";
 import Link from "next/link";
 
-export default function ReadJobPost() {
+export default function ReadModerator() {
   const [data, setData] = useState([]);
 
   const router = useRouter();
@@ -67,7 +67,7 @@ export default function ReadJobPost() {
             <div className=" flex  justify-center mt-2" key={d.id}>
               <hr />
 
-              <div className="card w-96 bg-primary text-primary-content">
+              <div className="card w-2/4 bg-white border border-cyan-700 text-black-500">
                 <div className="card-body">
                   <h1>Name: {d.name}</h1>
                   <p>Phone: {d.phone}</p>

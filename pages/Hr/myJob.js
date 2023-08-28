@@ -32,10 +32,10 @@ export default function MyJobPost() {
 
       {data &&
         data.map((d) => (
-          <div key={d.id} className=" flex  justify-center">
+          <div key={d.id} className=" flex  justify-center ">
             <hr />
 
-            <div class="max-w-sm rounded overflow-hidden shadow-lg py-5">
+            <div class="w-1/3 rounded overflow-hidden shadow-lg py-5">
               <div class="px-6 py-4">
                 <div class="font-bold text-xl mb-2">{d.title}</div>
               </div>
@@ -54,6 +54,10 @@ export default function MyJobPost() {
               <div class="px-6 pt-4 pb-2">
                 <button className="btn btn-primary">
                   <Link href={"/Hr/Details/" + d.id}>Details</Link>
+                </button>
+
+                <button className="ml-3 btn btn-primary">
+                  <Link href={"/Hr/Candidate/" + d.id}>Candidate</Link>
                 </button>
               </div>
             </div>

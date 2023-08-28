@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Header from "../Layout/moderatorHeader";
 import Link from "next/link";
 
-export default function MyPost() {
+export default function ReadJobPost() {
   const [data, setData] = useState([]);
 
   const router = useRouter();
@@ -12,11 +12,14 @@ export default function MyPost() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const data = await axios.get(`http://localhost:3000/moderator/post/`, {
-          withCredentials: true,
-        });
-        setData(data.data);
-        console.log(data.data);
+        const data = await axios.get(
+          `http://localhost:3000/moderator/hrwithModerator/`,
+          {
+            withCredentials: true,
+          }
+        );
+        setData(data.data[0].hrs);
+        console.log(data.data[0].hrs);
       } catch (error) {
         console.error(error);
       }
@@ -24,10 +27,10 @@ export default function MyPost() {
     getData();
   }, []);
 
-  const deletePost = async (id) => {
+  const deleteHr = async (id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:3000/moderator/post/${id}`,
+        `http://localhost:3000/moderator/hrwithmoderator/${id}`,
         {
           withCredentials: true,
         }
@@ -50,17 +53,22 @@ export default function MyPost() {
             <div className=" flex  justify-center mt-2" key={d.id}>
               <hr />
 
-              <div className="card w-2/4 bg-white border border-black text-black-content">
+              <div className="card w-2/4 bg-white-500 text-black-content border border-black ">
                 <div className="card-body">
-                  <h1>Name: {d.title}</h1>
-                  <p>Phone: {d.details}</p>
+                  <h1>Name: {d.name}</h1>
+                  <p>Phone: {d.phone}</p>
+                  <p>Email: {d.email}</p>
+                  <p>Gender: {d.gender}</p>
 
                   <div className="card-actions justify-end">
                     <button
-                      onClick={() => deletePost(d.id)}
+                      onClick={() => deleteHr(d.id)}
                       className="btn bg-red-800 text-white"
                     >
                       Delete
+                    </button>
+                    <button className="btn bg-green-800 text-white">
+                      <Link href={"/Moderator/" + d.id}>Hr Jobs</Link>
                     </button>
                   </div>
                 </div>

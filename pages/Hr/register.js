@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import Header from "../Layout/header";
 import Link from "next/link";
+import BeforeHeader from "../Layout/beforeHeader";
+import Footer from "../Layout/footer";
 
 export default function Register() {
   const router = useRouter();
@@ -16,6 +17,7 @@ export default function Register() {
     password: "",
     myfile: null,
   });
+
   const [errors, setErrors] = useState({
     name: "",
     phone: "",
@@ -44,14 +46,23 @@ export default function Register() {
     e.preventDefault();
     const newErrors = {};
 
+    const isValidEmail = (email) => {
+      const emailPattern = /^\S+@\S+\.\S+$/;
+      return emailPattern.test(email);
+    };
+
     if (!register.name) {
       newErrors.name = "Name is required";
+    } else if (register.name[0] != register.name[0].toUpperCase()) {
+      newErrors.name = "First letter should be uppercase";
     }
     if (!register.phone) {
       newErrors.phone = "Phone is required";
     }
     if (!register.email) {
       newErrors.email = "Email is required";
+    } else if (!isValidEmail(register.email)) {
+      newErrors.email = "Enter a valid email";
     }
     if (!register.gender) {
       newErrors.gender = "Gender is required";
@@ -107,102 +118,8 @@ export default function Register() {
   };
 
   return (
-    // <div>
-    //   <Header dashboard="Registration"></Header>
-    //   <form method="post" onSubmit={handleSubmit} encType="multipart/form-data">
-    //     <div>
-    //       <label>Name</label>
-    //       <input
-    //         type="text"
-    //         name="name"
-    //         value={register.name}
-    //         onChange={handleChange}
-    //       />
-    //       <br />
-    //     </div>
-
-    //     <div>
-    //       <label>Phone</label>
-    //       <input
-    //         type="text"
-    //         name="phone"
-    //         value={register.phone}
-    //         onChange={handleChange}
-    //       />
-    //       <br />
-    //     </div>
-
-    //     <div>
-    //       <label>Email</label>
-    //       <input
-    //         type="email"
-    //         name="email"
-    //         value={register.email}
-    //         onChange={handleChange}
-    //       />
-    //       <br />
-    //     </div>
-
-    //     <div>
-    //       <label>Gender</label>
-    //       <input
-    //         type="text"
-    //         name="gender"
-    //         value={register.gender}
-    //         onChange={handleChange}
-    //       />
-    //       <br />
-    //     </div>
-
-    //     <div>
-    //       <label>Password</label>
-    //       <input
-    //         type="password"
-    //         name="password"
-    //         value={register.password}
-    //         onChange={handleChange}
-    //       />
-    //       <br />
-    //     </div>
-
-    //     <div>
-    //       <label>Age</label>
-    //       <input
-    //         type="text"
-    //         name="age"
-    //         value={register.age}
-    //         onChange={handleChange}
-    //       />
-    //       <br />
-    //     </div>
-
-    //     <div>
-    //       <label>Image</label>
-    //       <input type="file" name="myfile" onChange={handleChange} />
-    //       <br />
-    //     </div>
-
-    //     <button type="submit">Submit</button>
-    //   </form>
-
-    //   <style jsx>{`
-    //     button {
-    //       color: white;
-    //       background: black;
-    //     }
-    //     input {
-    //       border-radius: 5px;
-    //     }
-    //     label {
-    //       padding: 30px;
-    //     }
-    //     div {
-    //       padding: 30px;
-    //     }
-    //   `}</style>
-    // </div>
     <div>
-      <h1 className="w-full max-w-lg container mx-auto mt-10">Register Here</h1>
+      <BeforeHeader></BeforeHeader>
       <form
         method="post"
         onSubmit={handleSubmit}
@@ -320,6 +237,7 @@ export default function Register() {
           <Link href="/Hr/login">Back</Link>
         </button>
       </form>
+      <Footer></Footer>
     </div>
   );
 }

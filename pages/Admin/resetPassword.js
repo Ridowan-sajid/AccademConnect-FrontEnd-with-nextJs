@@ -2,6 +2,8 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
+import BeforeHeader from "../Layout/beforeHeader";
+import Footer from "../Layout/footer";
 
 export default function Resetmail() {
   const router = useRouter();
@@ -40,6 +42,7 @@ export default function Resetmail() {
 
   return (
     <div>
+      <BeforeHeader></BeforeHeader>
       <br />
       <form
         className="w-full max-w-lg container mx-auto my-20"
@@ -66,6 +69,7 @@ export default function Resetmail() {
         </button>
       </form>
       <br />
+      <Footer></Footer>
     </div>
   );
 }

@@ -33,7 +33,7 @@ export default function ReadJobPost() {
             <div className=" flex  justify-center mt-2" key={d.id}>
               <hr />
 
-              <div className="card w-96 bg-primary text-primary-content">
+              <div className="card w-2/4 bg-white-500 border text-black-500">
                 <div className="card-body">
                   <h1>Name: {d.name}</h1>
                   <p>Phone: {d.phone}</p>

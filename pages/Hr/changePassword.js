@@ -80,6 +80,7 @@ import { useState } from "react";
 import Header from "../Layout/header";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Footer from "../Layout/footer";
 
 export default function ChangePassword() {
   const router = useRouter();
@@ -202,14 +203,7 @@ export default function ChangePassword() {
         </button>
       </form>
       <br />
-      {/* <style jsx>{`
-        p {
-          color: blue;
-        }
-        div {
-          padding: 30px;
-        }
-      `}</style> */}
+      <Footer></Footer>
     </div>
   );
 }

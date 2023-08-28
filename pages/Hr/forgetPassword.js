@@ -1,96 +1,8 @@
-// import { useRouter } from "next/router";
-// import { useState } from "react";
-// import axios from "axios";
-
-// export default function ForgetPassword() {
-//   const router = useRouter();
-
-//   const [register, setRegister] = useState({
-//     otp: "",
-//     newPassword: "",
-//   });
-
-//   const handleChange = (e) => {
-//     setRegister({
-//       ...register,
-//       [e.target.name]: e.target.value,
-//     });
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       const response = await axios.patch(
-//         "http://localhost:3000/hr/forgetPassword/",
-//         {
-//           otp: register.otp,
-//           newPassword: register.newPassword,
-//         }
-//         // {
-//         //   headers: { "Context-Type": "application/x-www-form-urlencoded" },
-//         //   withCredentials: true,
-//         // }
-//       );
-//       if (response.data) {
-//         console.log("Form submitted successfully");
-//         router.push("/Hr/login");
-//       }
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <form onSubmit={handleSubmit}>
-//         <div>
-//           <label>Otp</label>
-//           <input
-//             type="text"
-//             name="otp"
-//             value={register.otp}
-//             onChange={handleChange}
-//           />
-//           <br />
-//         </div>
-
-//         <div>
-//           <label>Password</label>
-//           <input
-//             type="text"
-//             name="newPassword"
-//             value={register.newPassword}
-//             onChange={handleChange}
-//           />
-//           <br />
-//         </div>
-//         <br />
-
-//         <button type="submit">Submit</button>
-//       </form>
-
-//       <style jsx>{`
-//         button {
-//           color: white;
-//           background: black;
-//         }
-//         input {
-//           border-radius: 5px;
-//         }
-//         label {
-//           padding: 30px;
-//         }
-//         div {
-//           padding: 30px;
-//         }
-//       `}</style>
-//     </div>
-//   );
-// }
-
 import { useRouter } from "next/router";
 import { useState } from "react";
 import axios from "axios";
+import BeforeHeader from "../Layout/beforeHeader";
+import Footer from "../Layout/footer";
 
 export default function ForgetPassword() {
   const router = useRouter();
@@ -159,6 +71,7 @@ export default function ForgetPassword() {
 
   return (
     <div>
+      <BeforeHeader></BeforeHeader>
       <form
         className="w-full max-w-lg container mx-auto my-20"
         onSubmit={handleSubmit}
@@ -203,6 +116,7 @@ export default function ForgetPassword() {
           Submit
         </button>
       </form>
+      <Footer></Footer>
     </div>
   );
 }

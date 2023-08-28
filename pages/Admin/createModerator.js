@@ -127,7 +127,6 @@ export default function Register() {
   return (
     <div>
       <Header></Header>
-      <h1 className="w-full max-w-lg container mx-auto mt-10">Register Here</h1>
       <form
         method="post"
         onSubmit={handleSubmit}

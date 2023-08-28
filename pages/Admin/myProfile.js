@@ -33,7 +33,7 @@ export default function MyProfile() {
               <img
                 style={{ width: 250 }}
                 className="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
-                src="http://localhost:3000/hr/getimage/"
+                src="http://localhost:3000/admin/getimage/"
                 alt="Something went wrong"
               />
             </figure>

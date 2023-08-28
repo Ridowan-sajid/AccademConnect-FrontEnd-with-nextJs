@@ -27,9 +27,21 @@ export default function Header() {
     }
   }
 
-  const handleLogout = () => {
-    logout();
-    router.push("../Admin/login");
+  const handleLogout = async () => {
+    //logout();
+    try {
+      const response = await axios.get("http://localhost:3000/admin/logout", {
+        // headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        withCredentials: true,
+      });
+      console.log(response);
+      setUser(null);
+      document.cookie = null;
+
+      router.push("../Admin/login");
+    } catch (error) {
+      console.error("error failed: ", error);
+    }
   };
 
   return (
